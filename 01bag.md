@@ -41,7 +41,8 @@ int f2[N];
 int g[N];
 int main() {
 	//n=4  m=5//物品数量，背包容量
-	//1 2  体积和价值
+	// 体积和价值
+	//1 2  
 	//2 4
 	//3 4
 	//4 5 
@@ -88,5 +89,15 @@ int main() {
 		memcpy(f2, g, sizeof f2);
 	}
 	cout << f2[m];
+
+	//滚动数组
+	for (int i = 1; i <= n; i++) {
+		for (int j = m; j >=0; j--) {//从后往前就不会覆盖啦
+			if (j >= v[i]) {
+				g[j] = max(g[j], g[j - v[i]] + w[i]);
+			}
+		}
+	}
+	cout << g[m];
 	return 0;
 }
